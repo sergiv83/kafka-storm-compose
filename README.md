@@ -16,6 +16,9 @@ To have infrastructure containing Apache Kafka and Apache Storm with all their d
 3. Double check created topic
 `$KAFKA_HOME/bin/kafka-topics.sh --describe --topic topic --zookeeper zk:2181`
 4. Start console message producer
-`$KAFKA_HOME/bin/kafka-console-producer.sh --topic=topic --broker-list=`broker-list.sh``
+``$KAFKA_HOME/bin/kafka-console-producer.sh --topic=topic --broker-list=`broker-list.sh```
 5. Open another shell (repeat point 1) and in this shell attach a console consumer to the created topic
-`$KAFKA_HOME/bin/kafka-console-consumer.sh --topic=topic --zookeeper=zk:2181`
+`$KAFKA_HOME/bin/kafka-console-consumer.sh --topic=topic --zookeeper=zk:2181
+
+## Storm UI
+Should be available on localhost:49080/index.html

@@ -2,6 +2,7 @@ zookeeper:
   image: wurstmeister/zookeeper
   ports:
     - 2181:2181
+    - 22
 kafka:
   image: wurstmeister/kafka
   ports:
@@ -15,3 +16,30 @@ kafka:
     KAFKA_ZOOKEEPER_CONNECT: zk:2181
   volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+nimbus:
+  image: wurstmeister/storm-nimbus
+  ports:
+    - 49773:3773
+    - 49772:3772
+    - 49627:6627
+    - 22
+  links: 
+    - zookeeper:zk
+    - kafka:kafka
+supervisor:
+  image: wurstmeister/storm-supervisor
+  ports:
+    - 8000
+    - 22
+  links: 
+    - nimbus:nimbus
+    - zookeeper:zk
+    - kafka:kafka
+ui:
+  image: wurstmeister/storm-ui
+  ports:
+    - "49080:8080"
+    - "22"
+  links: 
+    - nimbus:nimbus
+    - zookeeper:zk
