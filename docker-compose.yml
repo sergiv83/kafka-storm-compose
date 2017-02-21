@@ -3,6 +3,10 @@ zookeeper:
   ports:
     - 2181:2181
     - 22
+redis:
+  image: redis
+  ports:
+    - 6379:6379
 kafka:
   image: wurstmeister/kafka
   ports:
@@ -26,6 +30,7 @@ nimbus:
   links: 
     - zookeeper:zk
     - kafka:kafka
+    - redis:redis
 supervisor:
   image: wurstmeister/storm-supervisor
   ports:
